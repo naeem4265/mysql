@@ -156,4 +156,6 @@ SELECT NOW();
 ```
 
 
-# [Sources](https://youtu.be/aZnwpMON0NA?si=xsxKUiesnuLZX7gC)
+# Sources
+[Blog](https://www.w3schools.com/MySQL/)
+[Video](https://youtu.be/aZnwpMON0NA?si=xsxKUiesnuLZX7gC)
