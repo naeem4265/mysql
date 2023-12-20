@@ -29,6 +29,17 @@ DROP TABLE tableName;
 ```
 RENAME TABLE oldTable to newTable;
 ```
+### Add/Delete new column
+```
+ALTER TABLE tableName
+ADD columnx type(size)
+DELETE columny;
+```
+### Rename Column
+```
+ALTER TABLE tableName
+CHANGE oldcolumn_name new_columname type(size);
+```
 # DML
 ### Insert data into table.
 ```
@@ -86,22 +97,6 @@ FROM student;
 UPDATE tableName
 SET columnName=value
 WHERE condition;
-```
-### Add/Delete new column
-```
-ALTER TABLE tableName
-ADD columnx type(size)
-DELETE columny;
-```
-### Rename Column
-```
-ALTER TABLE tableName
-CHANGE oldcolumn_name new_columname type(size);
-```
-### Delete column
-```
-ALTER TABLE tableName
-DROP COLUMN columnName;
 ```
 ### Group by column 
 ```
