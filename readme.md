@@ -29,17 +29,6 @@ DROP TABLE tableName;
 ```
 RENAME TABLE oldTable to newTable;
 ```
-### Add/Delete new column
-```
-ALTER TABLE tableName
-ADD columnx type(size)
-DELETE columny;
-```
-### Rename Column
-```
-ALTER TABLE tableName
-CHANGE oldcolumn_name new_columname type(size);
-```
 # DML
 ### Insert data into table.
 ```
@@ -98,6 +87,22 @@ UPDATE tableName
 SET columnName=value
 WHERE condition;
 ```
+### Add/Delete new column
+```
+ALTER TABLE tableName
+ADD columnx type(size)
+DELETE columny;
+```
+### Rename Column
+```
+ALTER TABLE tableName
+CHANGE oldcolumn_name new_columname type(size);
+```
+### Delete column
+```
+ALTER TABLE tableName
+DROP COLUMN columnName;
+```
 ### Group by column 
 ```
 SELECT columnName
@@ -150,6 +155,32 @@ or
 SELECT NOW();
 ```
 
+# Practice
+
+### Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the Equilateral, Isosceles, Scalene or Not A Triangle
+```
+SELECT CASE WHEN ((A+B)<=C OR (B+C)<=A OR (A+C)<=B) THEN 'Not A Triangle' ELSE (CASE WHEN (A=B AND B=C) THEN 'Equilateral' WHEN ((A=B AND B!=C)OR (A=C AND A!=B) OR (B=C AND A!=B)) THEN 'Isosceles' ELSE 'Scalene' END ) END
+FROM TRIANGLES;
+```
+### Query the Name of any student in STUDENTS who scored higher than  Marks. Order your output by the last three characters of each name. If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
+```
+SELECT NAME 
+FROM STUDENTS
+WHERE MARKS > 75
+ORDER BY RIGHT(NAME, 3) ASC, ID ASC;
+```
+### Query the two cities in STATION with the shortest and longest CITY names, as well as their respective lengths (i.e.: number of characters in the name). If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.
+```
+(SELECT CITY, LENGTH(CITY)
+FROM STATION
+ORDER BY LENGTH(CITY) ASC, CITY ASC
+LIMIT 1)
+UNION ALL 
+(SELECT CITY, LENGTH(CITY)
+FROM STATION
+ORDER BY LENGTH(CITY) DESC, CITY ASC
+LIMIT 1);
+```
 
 # Sources
 [Blog](https://www.w3schools.com/MySQL/)
