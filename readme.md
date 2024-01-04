@@ -157,19 +157,19 @@ SELECT NOW();
 
 # Practice
 
-### Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the Equilateral, Isosceles, Scalene or Not A Triangle
+##### Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the Equilateral, Isosceles, Scalene or Not A Triangle
 ```
 SELECT CASE WHEN ((A+B)<=C OR (B+C)<=A OR (A+C)<=B) THEN 'Not A Triangle' ELSE (CASE WHEN (A=B AND B=C) THEN 'Equilateral' WHEN ((A=B AND B!=C)OR (A=C AND A!=B) OR (B=C AND A!=B)) THEN 'Isosceles' ELSE 'Scalene' END ) END
 FROM TRIANGLES;
 ```
-### Query the Name of any student in STUDENTS who scored higher than  Marks. Order your output by the last three characters of each name. If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
+##### Query the Name of any student in STUDENTS who scored higher than  Marks. Order your output by the last three characters of each name. If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
 ```
 SELECT NAME 
 FROM STUDENTS
 WHERE MARKS > 75
 ORDER BY RIGHT(NAME, 3) ASC, ID ASC;
 ```
-### Query the two cities in STATION with the shortest and longest CITY names, as well as their respective lengths (i.e.: number of characters in the name). If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.
+##### Query the two cities in STATION with the shortest and longest CITY names, as well as their respective lengths (i.e.: number of characters in the name). If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.
 ```
 (SELECT CITY, LENGTH(CITY)
 FROM STATION
@@ -181,6 +181,36 @@ FROM STATION
 ORDER BY LENGTH(CITY) DESC, CITY ASC
 LIMIT 1);
 ```
+##### Query an alphabetically ordered list of all names in OCCUPATIONS, immediately followed by the first letter of each profession as a parenthetical (i.e.: enclosed in parentheses). For example: AnActorName(A), ADoctorName(D), AProfessorName(P), and ASingerName(S). 2.Query the number of ocurrences of each occupation in OCCUPATIONS. Sort the occurrences in ascending order.:
+```
+(SELECT CONCAT(Name, '(', LEFT(OCCUPATION, 1), ')' )
+FROM OCCUPATIONS
+ORDER BY NAME ASC);
+
+(SELECT CONCAT('There are a total of ', COUNT(OCCUPATION), ' ', LOWER(OCCUPATION), 's.')
+FROM OCCUPATIONS
+GROUP BY OCCUPATION
+ORDER BY COUNT(Name) ASC, OCCUPATION ASC);
+```
+##### We define an employee's total earnings to be their monthly  worked, and the maximum total earnings to be the maximum total earnings for any employee in the Employee table. Write a query to find the maximum total earnings for all employees as well as the total number of employees who have maximum total earnings. Then print these values as  space-separated integers.:
+```
+SELECT MAX(salary*months), COUNT( employee_id )
+FROM Employee
+WHERE (salary*months) = (SELECT MAX(salary*months) FROM Employee );
+```
+##### Query the sum of Northern Latitudes (LAT_N) from STATION having values greater than  and less than . Truncate your answer to  decimal places.
+```
+SELECT ROUND( SUM(LAT_N), 4 )
+FROM STATION
+WHERE LAT_N > 38.7880 AND LAT_N < 137.2345;
+```
+##### Query the Western Longitude (LONG_W)where the smallest Northern Latitude (LAT_N) in STATION is greater than . Round your answer to  decimal places.
+```
+SELECT ROUND( LONG_W, 4 ) 
+FROM STATION
+WHERE LAT_N = ( SELECT MIN(LAT_N) FROM STATION WHERE LAT_N > 38.7780 );
+```
+
 
 # Sources
 [Blog](https://www.w3schools.com/MySQL/)
