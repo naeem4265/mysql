@@ -266,6 +266,17 @@ HAVING COUNT( s.submission_id ) > 1
 ORDER BY COUNT( s.submission_id ) DESC, h.hacker_id ASC;
 ```
 
+##### [Ollivander's Inventory](https://www.hackerrank.com/challenges/harry-potter-and-wands/problem?isFullScreen=true)
+```
+SELECT w.id, wp.age, w.coins_needed, w.power
+FROM Wands AS w INNER JOIN Wands_Property AS wp
+ON w.code = wp.code AND wp.is_evil = 0
+WHERE w.coins_needed = (SELECT MIN( coins_needed )
+                                         FROM Wands 
+                                         WHERE code = w.code and power = w.power )
+ORDER BY w.power DESC, wp.age DESC;
+```
+
 
 
 
