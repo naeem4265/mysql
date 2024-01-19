@@ -27,7 +27,7 @@ DROP TABLE tableName;
 ```
 ### Rename Table
 ```
-RENAME TABLE oldTable to newTable;
+RENAME oldTable to newTable;
 ```
 # DML
 ### Insert data into table.
